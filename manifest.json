@@ -21,9 +21,12 @@
       "48": "icons/icon.svg"
     }
   },
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
-      "id": "extension-watchdog@example.com"
+      "id": "extension-watchdog@s3c.in",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   }
 }

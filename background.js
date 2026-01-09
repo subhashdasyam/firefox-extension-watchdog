@@ -286,16 +286,8 @@ async function hydrateCounts() {
   updateBadge();
 }
 
-async function getPermissionWarnings(id) {
-  try {
-    if (!browser.management.getPermissionWarningsById) {
-      return [];
-    }
-    const warnings = await browser.management.getPermissionWarningsById(id);
-    return Array.isArray(warnings) ? warnings : [];
-  } catch (error) {
-    return [];
-  }
+async function getPermissionWarnings() {
+  return [];
 }
 
 async function syncInventory() {
@@ -307,7 +299,7 @@ async function syncInventory() {
     if (info.type !== "extension") continue;
     if (info.id === browser.runtime.id) continue;
 
-    const warnings = await getPermissionWarnings(info.id);
+    const warnings = await getPermissionWarnings();
     const prev = stored[info.id];
     const isNew = prev ? prev.isNew : initialized;
     next[info.id] = normalizeExtensionInfo(info, isNew, warnings);
@@ -321,7 +313,7 @@ async function upsertExtension(info, isNew = true) {
   if (info.type !== "extension") return;
   if (info.id === browser.runtime.id) return;
 
-  const warnings = await getPermissionWarnings(info.id);
+  const warnings = await getPermissionWarnings();
   const { entries: stored } = await getState();
   const prev = stored[info.id];
   const keepNew = prev ? prev.isNew : isNew;

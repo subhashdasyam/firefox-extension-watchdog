@@ -197,7 +197,7 @@ function getSourceName(alert, origin) {
 }
 
 function renderImpact(alert) {
-  impactSection.innerHTML = "";
+  impactSection.textContent = "";
   const heading = document.createElement("h3");
   heading.textContent = "Security-impact changes";
   impactSection.appendChild(heading);
@@ -304,7 +304,7 @@ function renderImpact(alert) {
 }
 
 function renderExtensionActivity(alert) {
-  extensionActivitySection.innerHTML = "";
+  extensionActivitySection.textContent = "";
   const heading = document.createElement("h3");
   heading.textContent = "What the extension did";
   extensionActivitySection.appendChild(heading);
@@ -399,7 +399,10 @@ function renderExtensionActivity(alert) {
       const item = document.createElement("li");
       item.className = "activity-item";
       const sample = group.scripts[0].src ? group.scripts[0].src : "Inline script";
-      item.innerHTML = `<strong>Scripts injected:</strong> ${group.scripts.length}`;
+      const label = document.createElement("strong");
+      label.textContent = "Scripts injected:";
+      item.appendChild(label);
+      item.appendChild(document.createTextNode(` ${group.scripts.length}`));
       const sampleEl = document.createElement("div");
       sampleEl.className = "activity-sample";
       sampleEl.textContent = `Example: ${sample}`;
@@ -411,7 +414,10 @@ function renderExtensionActivity(alert) {
       const item = document.createElement("li");
       item.className = "activity-item";
       const sample = group.iframes[0].src || "(no src)";
-      item.innerHTML = `<strong>Iframes added:</strong> ${group.iframes.length}`;
+      const label = document.createElement("strong");
+      label.textContent = "Iframes added:";
+      item.appendChild(label);
+      item.appendChild(document.createTextNode(` ${group.iframes.length}`));
       const sampleEl = document.createElement("div");
       sampleEl.className = "activity-sample";
       sampleEl.textContent = `Example: ${sample}`;
@@ -424,7 +430,10 @@ function renderExtensionActivity(alert) {
       item.className = "activity-item";
       const change = group.urlChanges[0];
       const sample = `${change.oldValue || ""} → ${change.newValue || ""}`;
-      item.innerHTML = `<strong>URLs changed:</strong> ${group.urlChanges.length}`;
+      const label = document.createElement("strong");
+      label.textContent = "URLs changed:";
+      item.appendChild(label);
+      item.appendChild(document.createTextNode(` ${group.urlChanges.length}`));
       const sampleEl = document.createElement("div");
       sampleEl.className = "activity-sample";
       sampleEl.textContent = `Example: ${sample}`;
@@ -485,7 +494,7 @@ function renderSourceExtensions(alert, extensions) {
 }
 
 function renderCandidates(alert, extensions) {
-  candidatesSection.innerHTML = "";
+  candidatesSection.textContent = "";
   const heading = document.createElement("h3");
   heading.textContent = "Possible extensions that can modify this page";
   candidatesSection.appendChild(heading);
@@ -656,7 +665,7 @@ function buildExportPayload(alerts, scopeLabel) {
 }
 
 function populateSelect(select, options, current) {
-  select.innerHTML = "";
+  select.textContent = "";
   for (const option of options) {
     const el = document.createElement("option");
     el.value = option.value;
@@ -740,7 +749,7 @@ async function updateStorageUsage() {
 function renderList() {
   listView.hidden = false;
   detailView.hidden = true;
-  listEl.innerHTML = "";
+  listEl.textContent = "";
   listInfoEl.textContent = "";
 
   const filtered = applyDateFilters(allAlerts);
@@ -918,7 +927,7 @@ function renderDetail(alert) {
   const counts = alert.counts || {};
   const level = alert.level || "low";
   const reasons = Array.isArray(alert.reasons) ? alert.reasons : [];
-  summaryEl.innerHTML = "";
+  summaryEl.textContent = "";
   const existing = document.querySelectorAll("[data-source-section]");
   existing.forEach((node) => node.remove());
   const levelEl = document.createElement("div");
@@ -953,7 +962,7 @@ function renderDetail(alert) {
   renderSourceExtensions(alert, window.__extensions || []);
   renderExtensionActivity(alert);
 
-  reasonsSection.innerHTML = "";
+  reasonsSection.textContent = "";
   const reasonsBlock = buildSection("Reasons", reasons, (li, item) => {
     const label = document.createElement("div");
     label.className = "label";
@@ -966,7 +975,7 @@ function renderDetail(alert) {
   const diff = alert.diff || {};
   const overflow = diff.overflow || {};
 
-  addedSection.innerHTML = "";
+  addedSection.textContent = "";
   addedSection.appendChild(
     buildSection("Added nodes", diff.added || [], (li, item) => {
       const label = document.createElement("div");
@@ -979,7 +988,7 @@ function renderDetail(alert) {
     }, overflow.added)
   );
 
-  removedSection.innerHTML = "";
+  removedSection.textContent = "";
   removedSection.appendChild(
     buildSection("Removed nodes", diff.removed || [], (li, item) => {
       const label = document.createElement("div");
@@ -992,7 +1001,7 @@ function renderDetail(alert) {
     }, overflow.removed)
   );
 
-  attrSection.innerHTML = "";
+  attrSection.textContent = "";
   attrSection.appendChild(
     buildSection("Attribute changes", diff.attributes || [], (li, item) => {
       const label = document.createElement("div");
@@ -1006,7 +1015,7 @@ New: ${item.newValue || ""}`;
     }, overflow.attributes)
   );
 
-  textSection.innerHTML = "";
+  textSection.textContent = "";
   textSection.appendChild(
     buildSection("Text changes", diff.text || [], (li, item) => {
       const label = document.createElement("div");

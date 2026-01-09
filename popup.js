@@ -148,7 +148,7 @@ function createSection(labelText, contentNode) {
 }
 
 function renderList(extensions, newCount) {
-  listEl.innerHTML = "";
+  listEl.textContent = "";
   emptyEl.hidden = extensions.length !== 0;
 
   cachedExtensions = extensions;
@@ -339,7 +339,7 @@ function updateFilterButtons(stats) {
 }
 
 function renderAlerts(alerts) {
-  alertsListEl.innerHTML = "";
+  alertsListEl.textContent = "";
   cachedAlerts = Array.isArray(alerts) ? alerts : [];
 
   const groups = new Map();
@@ -437,9 +437,11 @@ function renderAlerts(alerts) {
     const signalLine = document.createElement("div");
     signalLine.className = "alert-group-signal";
     const signals = Array.from(group.signals).slice(0, 3);
-    signalLine.innerHTML = signals.length
-      ? `<strong>Signals:</strong> ${signals.join(", ")}`
-      : "<strong>Signals:</strong> Page changed";
+    const signalLabel = document.createElement("strong");
+    signalLabel.textContent = "Signals:";
+    const signalText = signals.length ? signals.join(", ") : "Page changed";
+    signalLine.appendChild(signalLabel);
+    signalLine.appendChild(document.createTextNode(` ${signalText}`));
 
     const sourceNames = Array.from(group.sources).slice(0, 2);
     let sourceLine = null;
