@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Extension Watchdog</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <div class="title">Extension Watchdog</div>
+      <div class="meta" id="meta">Loading…</div>
+    </header>
+    <div class="tabs">
+      <div class="segmented" role="tablist" aria-label="Extension Watchdog views">
+        <button id="tab-alerts" class="segmented-button active" data-view="alerts" type="button">
+          Alerts
+        </button>
+        <button id="tab-extensions" class="segmented-button" data-view="extensions" type="button">
+          Extensions
+        </button>
+      </div>
+    </div>
+    <main>
+      <section id="alerts-view" class="alerts-section view">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Site Alerts</div>
+            <div class="section-subtitle" id="alerts-summary">No alerts yet.</div>
+          </div>
+          <div class="section-actions">
+            <button id="open-log" class="link-button" type="button">Open dashboard</button>
+            <button id="clear-alerts" class="link-button" type="button">Clear</button>
+          </div>
+        </div>
+        <div class="summary-row" id="alert-filters">
+          <button class="summary-pill active" data-filter="all" type="button">
+            All <span id="count-all">0</span>
+          </button>
+          <button class="summary-pill high" data-filter="high" type="button">
+            High <span id="count-high">0</span>
+          </button>
+          <button class="summary-pill medium" data-filter="medium" type="button">
+            Medium <span id="count-medium">0</span>
+          </button>
+          <button class="summary-pill low" data-filter="low" type="button">
+            Low <span id="count-low">0</span>
+          </button>
+        </div>
+        <ul id="alerts-list" class="alerts-list"></ul>
+        <div id="alerts-empty" class="empty" hidden>
+          No page change alerts yet.
+        </div>
+        <div id="alerts-more" class="more" hidden>
+          More sites have activity. <button id="open-log-2" class="link-button" type="button">Open dashboard</button>
+        </div>
+      </section>
+      <section id="extensions-view" class="extensions-section view" hidden>
+        <div class="section-header">
+          <div>
+            <div class="section-title">Installed Extensions</div>
+            <div class="section-subtitle" id="extensions-summary">Loading…</div>
+          </div>
+          <div class="section-actions">
+            <button id="refresh" class="link-button" type="button">Refresh</button>
+            <button id="clear" class="link-button" type="button">Clear New</button>
+          </div>
+        </div>
+        <ul id="list" class="list"></ul>
+        <div id="empty" class="empty" hidden>
+          No extensions detected yet.
+        </div>
+      </section>
+    </main>
+    <script src="permission-glossary.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

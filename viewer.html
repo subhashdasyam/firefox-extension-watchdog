@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Page Change Log</title>
+    <link rel="stylesheet" href="viewer.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <div class="title">Page Change Log</div>
+        <div class="meta" id="meta">Loading…</div>
+      </div>
+      <div class="actions">
+        <button id="open-page" type="button" disabled>Open page</button>
+        <button id="copy-json" type="button">Copy raw</button>
+      </div>
+    </header>
+    <main>
+      <section id="list-view" class="panel" hidden>
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Activity feed</div>
+            <div class="panel-subtitle" id="list-summary">Loading…</div>
+          </div>
+          <div class="storage" id="storage-usage">Storage: …</div>
+        </div>
+        <div class="filters">
+          <label class="filter">
+            <span>Year</span>
+            <select id="filter-year"></select>
+          </label>
+          <label class="filter">
+            <span>Month</span>
+            <select id="filter-month"></select>
+          </label>
+          <label class="filter">
+            <span>Day</span>
+            <select id="filter-day"></select>
+          </label>
+        </div>
+        <div class="clear-panel">
+          <div class="clear-title">Clear old data</div>
+          <div class="clear-row">
+            <button class="pill" data-prune="12" type="button">Clear older than 1 year</button>
+            <button class="pill" data-prune="6" type="button">Clear older than 6 months</button>
+            <button class="pill" data-prune="3" type="button">Clear older than 3 months</button>
+            <button class="pill" data-prune="1" type="button">Clear older than 1 month</button>
+          </div>
+          <div class="clear-row">
+            <input id="clear-start" type="date" />
+            <input id="clear-end" type="date" />
+            <button id="clear-range" class="pill" type="button">Clear range</button>
+          </div>
+          <div class="clear-row">
+            <button id="clear-all" class="pill danger" type="button">Clear all alerts</button>
+          </div>
+        </div>
+        <div class="clear-panel">
+          <div class="clear-title">Export data</div>
+          <div class="clear-row">
+            <button id="export-filtered" class="pill" type="button">Export filtered</button>
+            <button id="export-all" class="pill" type="button">Export all</button>
+          </div>
+        </div>
+        <div id="list-info" class="muted"></div>
+        <ul id="alert-list" class="alert-list"></ul>
+      </section>
+      <section id="detail-view" class="panel" hidden>
+        <div class="panel-title" id="detail-title">Alert details</div>
+        <div id="summary" class="summary"></div>
+        <div class="section" id="impact-section"></div>
+        <div class="section" id="extension-activity-section"></div>
+        <div class="section" id="reasons-section"></div>
+        <div class="section" id="candidates-section"></div>
+        <details id="raw-changes" class="section">
+          <summary>All page changes (advanced)</summary>
+          <div class="section" id="added-section"></div>
+          <div class="section" id="removed-section"></div>
+          <div class="section" id="attr-section"></div>
+          <div class="section" id="text-section"></div>
+        </details>
+      </section>
+    </main>
+    <script src="permission-glossary.js"></script>
+    <script src="viewer.js"></script>
+  </body>
+</html>
