@@ -36,6 +36,13 @@ jobs:
               "web-ext-artifacts/**" \
               "*.zip"
 
+      - name: Normalize artifact extension
+        run: |
+          for f in web-ext-artifacts/*.zip; do
+            [ -e "$f" ] || continue
+            mv "$f" "${f%.zip}.xpi"
+          done
+
       - name: Upload XPI artifact
         uses: actions/upload-artifact@v4
         with:
